@@ -1,3 +1,4 @@
+
 import React from "react";
 import { ResumeData, formatDateRange } from "./ResumeSections";
 
@@ -9,16 +10,16 @@ interface ResumePreviewProps {
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTitle = false }) => {
   return (
     <div className="w-full h-full overflow-auto bg-white rounded-md shadow-md p-6 resume-preview">
-      <div className="resume-paper max-w-[8.5in] mx-auto bg-white px-12 py-6"> {/* Increased horizontal padding */}
+      <div className="resume-paper max-w-[8.5in] mx-auto bg-white px-12 py-6"> 
         {/* Header/Personal Info with clean, minimal design */}
-        <div className="mb-3 pb-1 border-b border-resume-accent"> {/* Reduced bottom margin */}
+        <div className="mb-3 pb-1 border-b border-resume-accent"> 
           <h1 className="text-lg font-bold text-resume-heading">{data.personal.name}</h1>
           {!hideProfessionalTitle && (
-            <p className="text-xs font-medium text-resume-accent">{data.personal.title}</p> {/* Use single accent color */}
+            <p className="text-xs font-medium text-resume-accent">{data.personal.title}</p>
           )}
           <div className="text-xs mt-1 flex flex-wrap gap-x-3 text-resume-text">
             <span>{data.personal.email}</span>
-            <span className="before:content-['•'] before:mx-2 before:text-resume-accent"> {/* Use single accent as separator */}
+            <span className="before:content-['•'] before:mx-2 before:text-resume-accent">
               {data.personal.phone}
             </span>
             <span className="before:content-['•'] before:mx-2 before:text-resume-accent">
@@ -90,7 +91,7 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTit
             <h2 className="resume-heading">Skills</h2>
             <div className="flex flex-wrap gap-1.5">
               {data.skills.map((skill) => (
-                <span key={skill.id} className="text-xs px-2 py-0.5 rounded-full bg-resume-light text-resume-text">
+                <span key={skill.id} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-resume-text">
                   {skill.name}
                 </span>
               ))}

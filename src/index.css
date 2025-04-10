@@ -118,11 +118,11 @@
   }
 
   .resume-date {
-    @apply text-xs text-resume-tertiary font-medium;
+    @apply text-xs text-resume-text font-medium;
   }
 
   .resume-location {
-    @apply text-xs text-resume-secondary italic;
+    @apply text-xs text-resume-text italic;
   }
 }
 
