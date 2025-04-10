@@ -123,6 +123,10 @@ export default {
 				'scale-in': {
 					'0%': { transform: 'scale(0.95)', opacity: '0' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'card-hover': {
+					'0%': { transform: 'translateY(0)' },
+					'100%': { transform: 'translateY(-5px)' },
 				}
 			},
 			animation: {
@@ -132,13 +136,15 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'slide-in': 'slide-in 0.2s ease-out',
 				'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
-				'scale-in': 'scale-in 0.2s ease-out'
+				'scale-in': 'scale-in 0.2s ease-out',
+				'card-hover': 'card-hover 0.3s ease forwards',
 			},
 			boxShadow: {
 				'soft': '0 2px 15px rgba(0, 0, 0, 0.06)',
 				'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
 				'input': '0 1px 3px rgba(0, 0, 0, 0.05)',
 				'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02)',
+				'card-lg': '0 15px 30px -8px rgba(0, 0, 0, 0.08), 0 10px 20px -10px rgba(0, 0, 0, 0.04)',
 			},
 			backgroundSize: {
 				'size-200': '200% 200%',
