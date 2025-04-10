@@ -1,10 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ResumeData } from "./ResumeSections";
+import { Switch } from "@/components/ui/switch";
 
 interface PersonalInfoFormProps {
   data: ResumeData;
@@ -17,6 +18,8 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
   updateData,
   onNext,
 }) => {
+  const [showTitle, setShowTitle] = useState(true);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -30,9 +33,23 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
     });
   };
 
+  const handleToggleTitle = (checked: boolean) => {
+    setShowTitle(checked);
+    // If we're hiding the title, we should empty it out to save space in the data structure
+    if (!checked) {
+      updateData({
+        ...data,
+        personal: {
+          ...data.personal,
+          title: "",
+        },
+      });
+    }
+  };
+
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">Personal Information</h2>
+      <h2 className="text-xl font-bold text-primary">Personal Information</h2>
       <div className="space-y-4">
         <div>
           <Label htmlFor="name">Full Name</Label>
@@ -43,20 +60,35 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="John Doe"
+            className="form-input"
           />
         </div>
 
-        <div>
-          <Label htmlFor="title">Professional Title</Label>
-          <Input
-            id="title"
-            name="title"
-            value={data.personal.title}
-            onChange={handleChange}
-            maxLength={50}
-            placeholder="Software Engineer"
+        <div className="flex items-center justify-between mb-2">
+          <Label htmlFor="show-title" className="cursor-pointer">
+            Show Professional Title
+          </Label>
+          <Switch 
+            id="show-title" 
+            checked={showTitle} 
+            onCheckedChange={handleToggleTitle}
           />
         </div>
+
+        {showTitle && (
+          <div>
+            <Label htmlFor="title">Professional Title</Label>
+            <Input
+              id="title"
+              name="title"
+              value={data.personal.title}
+              onChange={handleChange}
+              maxLength={50}
+              placeholder="Software Engineer"
+              className="form-input"
+            />
+          </div>
+        )}
 
         <div>
           <Label htmlFor="email">Email</Label>
@@ -68,6 +100,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="john.doe@example.com"
+            className="form-input"
           />
         </div>
 
@@ -80,6 +113,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={20}
             placeholder="(123) 456-7890"
+            className="form-input"
           />
         </div>
 
@@ -92,6 +126,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="New York, NY"
+            className="form-input"
           />
         </div>
 
@@ -105,6 +140,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             maxLength={300}
             placeholder="Brief summary of your career goals and expertise"
             rows={4}
+            className="form-input resize-none"
           />
           <p className="text-xs text-gray-500 mt-1">
             {data.personal.summary.length}/300 characters
@@ -113,7 +149,9 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
       </div>
 
       <div className="flex justify-end">
-        <Button onClick={onNext}>Next</Button>
+        <Button onClick={onNext} className="bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500">
+          Next
+        </Button>
       </div>
     </div>
   );

@@ -4,16 +4,19 @@ import { ResumeData, formatDateRange } from "./ResumeSections";
 
 interface ResumePreviewProps {
   data: ResumeData;
+  hideProfessionalTitle?: boolean;
 }
 
-const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
+const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTitle = false }) => {
   return (
     <div className="w-full h-full overflow-auto bg-white rounded-md shadow-md p-6 resume-preview">
       <div className="resume-paper max-w-[8.5in] mx-auto bg-white p-6">
         {/* Header/Personal Info with design accent */}
-        <div className="mb-4 pb-2 border-b-2 border-resume-accent">
-          <h1 className="text-xl font-bold text-resume-heading">{data.personal.name}</h1>
-          <p className="text-sm font-medium text-resume-secondary">{data.personal.title}</p>
+        <div className="mb-4 pb-1 border-b border-resume-accent">
+          <h1 className="text-lg font-bold text-resume-heading">{data.personal.name}</h1>
+          {!hideProfessionalTitle && (
+            <p className="text-xs font-medium text-resume-secondary">{data.personal.title}</p>
+          )}
           <div className="text-xs mt-1 flex flex-wrap gap-x-3 text-resume-text">
             <span className="flex items-center">
               <span className="inline-block w-1 h-1 rounded-full bg-resume-accent mr-1"></span>

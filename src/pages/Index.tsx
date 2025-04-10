@@ -32,9 +32,12 @@ const Index = () => {
   const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData);
   const [currentSection, setCurrentSection] = useState<SectionType>("personal");
   const [isStarted, setIsStarted] = useState(false);
+  const [hideProfessionalTitle, setHideProfessionalTitle] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
 
   const handleUpdateData = (data: ResumeData) => {
+    // Check if professional title is empty or not
+    setHideProfessionalTitle(!data.personal.title);
     setResumeData(data);
   };
 
@@ -267,7 +270,7 @@ const Index = () => {
           {/* Preview panel */}
           <div className="lg:order-2 order-1 h-[calc(100vh-10rem)]">
             <Card className="h-full overflow-hidden shadow-soft rounded-xl border-0">
-              <ResumePreview data={resumeData} />
+              <ResumePreview data={resumeData} hideProfessionalTitle={hideProfessionalTitle} />
             </Card>
           </div>
         </div>

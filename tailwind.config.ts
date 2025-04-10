@@ -20,9 +20,9 @@ export default {
 		},
 		extend: {
 			spacing: {
-				'resume-sectionGap': '1rem',
-				'resume-itemGap': '0.5rem',
-				'resume-lineGap': '0.2rem',
+				'resume-sectionGap': '0.75rem',
+				'resume-itemGap': '0.35rem',
+				'resume-lineGap': '0.15rem',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
