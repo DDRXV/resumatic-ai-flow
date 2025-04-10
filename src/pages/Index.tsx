@@ -149,7 +149,7 @@ const Index = () => {
           </div>
         </div>
         
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-heading">
           Resumatic AI Builder
         </h1>
         
@@ -164,7 +164,7 @@ const Index = () => {
               <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
                 <FileText className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="font-medium mb-2 text-lg">ATS Optimized</h3>
+              <h3 className="font-medium mb-2 text-lg font-heading">ATS Optimized</h3>
               <p className="text-sm text-gray-500">
                 Single-column format for maximum ATS compatibility
               </p>
@@ -174,7 +174,7 @@ const Index = () => {
               <div className="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-100 transition-colors">
                 <ArrowRight className="h-7 w-7 text-secondary" />
               </div>
-              <h3 className="font-medium mb-2 text-lg">Step-by-Step</h3>
+              <h3 className="font-medium mb-2 text-lg font-heading">Step-by-Step</h3>
               <p className="text-sm text-gray-500">
                 Guided process with live preview as you build
               </p>
@@ -217,7 +217,7 @@ const Index = () => {
       <header className="bg-white border-b py-4 shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-heading">
               Resumatic AI Builder
             </h1>
             
@@ -233,14 +233,14 @@ const Index = () => {
                     {index > 0 && (
                       <div 
                         className={`h-0.5 w-6 mx-1 ${
-                          index <= currentIndex ? "bg-primary" : "bg-gray-200"
-                        }`}
+                          index <= currentIndex ? "bg-gradient-to-r from-primary to-secondary" : "bg-gray-200"
+                        } transition-all duration-300`}
                       />
                     )}
                     <button
-                      className={`relative flex items-center justify-center rounded-full transition-all ${
+                      className={`relative flex items-center justify-center rounded-full transition-all duration-200 ${
                         isActive 
-                          ? "bg-primary text-white h-8 w-8" 
+                          ? "bg-gradient-to-r from-primary to-secondary text-white h-8 w-8 shadow-md" 
                           : isCompleted 
                             ? "bg-primary/15 text-primary h-7 w-7" 
                             : "bg-gray-100 text-gray-400 h-7 w-7"
@@ -254,7 +254,9 @@ const Index = () => {
                       title={section.label}
                     >
                       {section.icon}
-                      <span className="absolute -bottom-6 text-xs font-medium whitespace-nowrap">
+                      <span className={`absolute -bottom-6 text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+                        isActive ? "text-primary" : "text-gray-500"
+                      }`}>
                         {section.label}
                       </span>
                     </button>
@@ -272,7 +274,7 @@ const Index = () => {
                     key={section.id}
                     className={`w-3 h-3 rounded-full transition-all duration-200 ${
                       section.id === currentSection
-                        ? "bg-primary scale-110"
+                        ? "bg-gradient-to-r from-primary to-secondary scale-110 shadow-sm"
                         : index <= currentIndex
                         ? "bg-primary/40"
                         : "bg-gray-200"
@@ -296,12 +298,12 @@ const Index = () => {
       <div className="flex-1 container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Editor panel */}
-          <div ref={editorRef} className="lg:order-1 order-2 overflow-y-auto h-[calc(100vh-10rem)]">
-            <Card className="p-6 shadow-soft rounded-xl border-0">{renderForm()}</Card>
+          <div ref={editorRef} className="lg:order-1 order-2 overflow-y-auto h-[calc(100vh-10rem)] animate-fade-in">
+            <Card className="p-6 shadow-soft rounded-xl border-0 hover:shadow-md transition-all duration-300">{renderForm()}</Card>
           </div>
 
           {/* Preview panel */}
-          <div className="lg:order-2 order-1 h-[calc(100vh-10rem)]">
+          <div className="lg:order-2 order-1 h-[calc(100vh-10rem)] animate-fade-in">
             <Card className="h-full overflow-hidden shadow-soft rounded-xl border-0">
               <ResumePreview data={resumeData} hideProfessionalTitle={hideProfessionalTitle} />
             </Card>

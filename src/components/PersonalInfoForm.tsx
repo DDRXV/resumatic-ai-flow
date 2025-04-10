@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ResumeData } from "./ResumeSections";
 import { Switch } from "@/components/ui/switch";
+import { User, Mail, Phone, MapPin, FileText } from "lucide-react";
 
 interface PersonalInfoFormProps {
   data: ResumeData;
@@ -48,11 +49,22 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-bold text-primary">Personal Information</h2>
-      <div className="space-y-4">
-        <div>
-          <Label htmlFor="name">Full Name</Label>
+    <div className="space-y-5">
+      <div>
+        <h2 className="form-section-title bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+          Personal Information
+        </h2>
+        <p className="form-section-subtitle">
+          Let's start with the basics about you
+        </p>
+      </div>
+      
+      <div className="form-field-group">
+        <div className="relative">
+          <Label htmlFor="name" className="form-label flex items-center">
+            <User className="h-3.5 w-3.5 mr-1.5 text-primary" />
+            Full Name
+          </Label>
           <Input
             id="name"
             name="name"
@@ -60,12 +72,13 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="John Doe"
-            className="form-input"
+            className="form-input pl-3 pr-3 py-2.5 shadow-sm"
           />
         </div>
 
-        <div className="flex items-center justify-between mb-2">
-          <Label htmlFor="show-title" className="cursor-pointer">
+        <div className="flex items-center justify-between pt-2 pb-1">
+          <Label htmlFor="show-title" className="form-label cursor-pointer flex items-center">
+            <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
             Show Professional Title
           </Label>
           <Switch 
@@ -76,8 +89,10 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </div>
 
         {showTitle && (
-          <div>
-            <Label htmlFor="title">Professional Title</Label>
+          <div className="animate-fade-in">
+            <Label htmlFor="title" className="form-label">
+              Professional Title
+            </Label>
             <Input
               id="title"
               name="title"
@@ -85,13 +100,16 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
               onChange={handleChange}
               maxLength={50}
               placeholder="Software Engineer"
-              className="form-input"
+              className="form-input shadow-sm"
             />
           </div>
         )}
 
-        <div>
-          <Label htmlFor="email">Email</Label>
+        <div className="relative">
+          <Label htmlFor="email" className="form-label flex items-center">
+            <Mail className="h-3.5 w-3.5 mr-1.5 text-primary" />
+            Email
+          </Label>
           <Input
             id="email"
             name="email"
@@ -100,12 +118,15 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="john.doe@example.com"
-            className="form-input"
+            className="form-input shadow-sm"
           />
         </div>
 
-        <div>
-          <Label htmlFor="phone">Phone</Label>
+        <div className="relative">
+          <Label htmlFor="phone" className="form-label flex items-center">
+            <Phone className="h-3.5 w-3.5 mr-1.5 text-primary" />
+            Phone
+          </Label>
           <Input
             id="phone"
             name="phone"
@@ -113,12 +134,15 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={20}
             placeholder="(123) 456-7890"
-            className="form-input"
+            className="form-input shadow-sm"
           />
         </div>
 
-        <div>
-          <Label htmlFor="location">Location</Label>
+        <div className="relative">
+          <Label htmlFor="location" className="form-label flex items-center">
+            <MapPin className="h-3.5 w-3.5 mr-1.5 text-primary" />
+            Location
+          </Label>
           <Input
             id="location"
             name="location"
@@ -126,12 +150,15 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             onChange={handleChange}
             maxLength={50}
             placeholder="New York, NY"
-            className="form-input"
+            className="form-input shadow-sm"
           />
         </div>
 
         <div>
-          <Label htmlFor="summary">Professional Summary</Label>
+          <Label htmlFor="summary" className="form-label flex items-center">
+            <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
+            Professional Summary
+          </Label>
           <Textarea
             id="summary"
             name="summary"
@@ -140,17 +167,41 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             maxLength={300}
             placeholder="Brief summary of your career goals and expertise"
             rows={4}
-            className="form-input resize-none"
+            className="form-input resize-none shadow-sm"
           />
-          <p className="text-xs text-gray-500 mt-1">
-            {data.personal.summary.length}/300 characters
-          </p>
+          <div className="flex justify-between mt-1.5">
+            <p className="text-xs text-gray-500">
+              {data.personal.summary.length}/300 characters
+            </p>
+            <div className="h-1 w-24 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300"
+                style={{ width: `${(data.personal.summary.length / 300) * 100}%` }}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="flex justify-end">
-        <Button onClick={onNext} className="bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500">
-          Next
+      <div className="form-buttons">
+        <div></div> {/* Empty div for flex spacing */}
+        <Button 
+          onClick={onNext} 
+          className="form-button-next"
+        >
+          Continue to Education
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-4 w-4 ml-1.5" 
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+          >
+            <path 
+              fillRule="evenodd" 
+              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" 
+              clipRule="evenodd"
+            />
+          </svg>
         </Button>
       </div>
     </div>
