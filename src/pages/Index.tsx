@@ -8,8 +8,10 @@ import ExperienceForm from "@/components/ExperienceForm";
 import SkillsForm from "@/components/SkillsForm";
 import ProjectsForm from "@/components/ProjectsForm";
 import FinishForm from "@/components/FinishForm";
+import TemplateSelector from "@/components/TemplateSelector";
 import { Card } from "@/components/ui/card";
-import { FileText, ArrowLeft, ArrowRight, User, BookOpen, Briefcase, Code, Shapes, CheckCircle } from "lucide-react";
+import { FileText, ArrowLeft, ArrowRight, User, BookOpen, Briefcase, Code, Shapes, CheckCircle, LayoutTemplate } from "lucide-react";
+import { useTemplates, ResumeTemplate } from "@/contexts/TemplateContext";
 
 type SectionType = "personal" | "education" | "experience" | "skills" | "projects" | "finish";
 
@@ -33,7 +35,9 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState<SectionType>("personal");
   const [isStarted, setIsStarted] = useState(false);
   const [hideProfessionalTitle, setHideProfessionalTitle] = useState(false);
+  const [isSelectingTemplate, setIsSelectingTemplate] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
+  const { setSelectedTemplate } = useTemplates();
 
   const handleUpdateData = (data: ResumeData) => {
     // Check if professional title is empty or not
@@ -66,6 +70,16 @@ const Index = () => {
     if (editorRef.current) {
       editorRef.current.scrollTop = 0;
     }
+  };
+
+  const handleTemplateSelection = (template: ResumeTemplate) => {
+    setSelectedTemplate(template);
+    setIsSelectingTemplate(false);
+  };
+
+  const handleStart = () => {
+    setIsStarted(true);
+    setIsSelectingTemplate(true);
   };
 
   const renderForm = () => {
@@ -169,11 +183,30 @@ const Index = () => {
         </div>
         
         <button
-          onClick={() => setIsStarted(true)}
+          onClick={handleStart}
           className="px-8 py-4 bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 bg-pos-0 rounded-xl text-white font-medium shadow-md hover:shadow-lg hover:bg-pos-100 transition-all duration-500 transform hover:scale-105"
         >
           Start Building Your Resume
         </button>
+      </div>
+    </div>
+  );
+
+  const renderTemplateSelector = () => (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white py-12">
+      <div className="container mx-auto">
+        <div className="mb-6 text-center">
+          <div className="inline-block">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full blur opacity-30"></div>
+              <div className="relative bg-white rounded-full p-3 shadow-soft">
+                <LayoutTemplate className="h-8 w-8 text-primary" />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <TemplateSelector onSelect={handleTemplateSelection} />
       </div>
     </div>
   );
@@ -278,7 +311,15 @@ const Index = () => {
     </div>
   );
 
-  return isStarted ? renderBuilder() : renderStartScreen();
+  if (!isStarted) {
+    return renderStartScreen();
+  }
+
+  if (isSelectingTemplate) {
+    return renderTemplateSelector();
+  }
+
+  return renderBuilder();
 };
 
 export default Index;
