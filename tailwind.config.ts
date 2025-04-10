@@ -79,6 +79,15 @@ export default {
 					text: '#475569', // Neutral gray for text
 					accent: '#0EA5E9', // Clean, professional blue
 					background: '#ffffff', // Pure white
+					subtle: '#f1f5f9', // Very light gray for subtle backgrounds
+					highlight: '#e0f2fe', // Light blue for highlights
+					border: '#cbd5e1', // Light gray border
+				},
+				editor: {
+					lightBg: '#f8fafc',
+					highlight: '#f0f9ff',
+					border: '#e2e8f0',
+					focus: '#bfdbfe',
 				}
 			},
 			borderRadius: {
@@ -106,6 +115,14 @@ export default {
 				'slide-in': {
 					'0%': { transform: 'translateX(-10px)', opacity: '0' },
 					'100%': { transform: 'translateX(0)', opacity: '1' }
+				},
+				'pulse-soft': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
@@ -113,12 +130,23 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 3s ease-in-out infinite',
 				'fade-in': 'fade-in 0.3s ease-out',
-				'slide-in': 'slide-in 0.2s ease-out'
+				'slide-in': 'slide-in 0.2s ease-out',
+				'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+				'scale-in': 'scale-in 0.2s ease-out'
 			},
 			boxShadow: {
 				'soft': '0 2px 15px rgba(0, 0, 0, 0.06)',
-				'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
-			}
+				'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+				'input': '0 1px 3px rgba(0, 0, 0, 0.05)',
+				'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02)',
+			},
+			backgroundSize: {
+				'size-200': '200% 200%',
+			},
+			backgroundPosition: {
+				'pos-0': '0% 0%',
+				'pos-100': '100% 100%',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

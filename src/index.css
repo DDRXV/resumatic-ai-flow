@@ -139,7 +139,7 @@
   }
 
   .form-input {
-    @apply bg-gray-50 border-gray-200 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-primary/20 focus:border-primary;
+    @apply bg-editor-lightBg border-editor-border rounded-lg transition-all duration-200 focus:ring-2 focus:ring-primary/20 focus:border-primary;
   }
 
   .form-label {
@@ -155,7 +155,7 @@
   }
 
   .form-item-container {
-    @apply p-5 border border-gray-100 rounded-xl bg-white shadow-sm mb-4 animate-fade-in;
+    @apply p-5 border border-gray-100 rounded-xl bg-white shadow-sm mb-4 animate-fade-in hover:shadow-card-hover transition-all duration-300;
   }
 
   .form-item-header {
@@ -176,12 +176,49 @@
   
   .form-button-next {
     @apply bg-gradient-to-r from-primary to-secondary text-white font-medium px-5 py-2.5 rounded-lg 
-    hover:opacity-90 transition-all duration-200;
+    hover:opacity-90 transition-all duration-200 shadow-sm hover:shadow-md;
   }
   
   .form-button-back {
     @apply bg-white text-gray-600 font-medium px-5 py-2.5 rounded-lg border border-gray-200
     hover:bg-gray-50 transition-all duration-200;
+  }
+
+  /* Input Field with Icon */
+  .input-with-icon {
+    @apply relative;
+  }
+
+  .input-with-icon input, 
+  .input-with-icon textarea {
+    @apply pl-9;
+  }
+
+  .input-with-icon svg {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+  }
+
+  /* Card Styles */
+  .content-card {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-card-hover transition-all duration-300;
+  }
+
+  /* Badge Styles */
+  .count-badge {
+    @apply inline-flex items-center justify-center bg-primary/10 text-primary text-xs font-medium rounded-full px-2 py-0.5;
+  }
+
+  /* Animated Elements */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .hover-float {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/5;
   }
 }
 
@@ -234,4 +271,49 @@
 
 .month-year-picker select {
   @apply bg-background border border-input rounded-md p-2 text-sm;
+}
+
+/* Gradient Button */
+.gradient-button {
+  @apply bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500;
+}
+
+/* Animated Section */
+.animated-section {
+  @apply opacity-0 translate-y-4;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Timeline Elements */
+.timeline-container {
+  @apply relative pl-6 border-l border-gray-200 ml-2;
+}
+
+.timeline-node {
+  @apply absolute -left-2 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary;
+}
+
+/* Drop Area */
+.drop-area {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center transition-colors hover:border-primary/50 hover:bg-primary/5;
+}
+
+/* Tags/Chip Input */
+.tag-container {
+  @apply flex flex-wrap gap-2 p-2 border rounded-lg;
+}
+
+.tag {
+  @apply flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs;
+}
+
+.tag-delete {
+  @apply text-gray-500 hover:text-red-500 cursor-pointer;
 }
