@@ -28,7 +28,7 @@ export const templates: ResumeTemplate[] = [
     id: "sidebyside",
     name: "Side Panel",
     description: "Two-column layout with a colored sidebar for visual impact.",
-    accent: "#0F766E",
+    accent: "#1e293b",
     preview: SideBySideTemplate,
   },
   {
@@ -56,7 +56,7 @@ export const templates: ResumeTemplate[] = [
     id: "creative",
     name: "Creative",
     description: "Bold, colorful design with modern styling elements.",
-    accent: "#6366F1",
+    accent: "#4F46E5",
     preview: CreativeTemplate,
   },
   {

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { ResumeData, formatDateRange } from "../ResumeSections";
+import { Mail, Phone, MapPin, User, Briefcase, GraduationCap, Award, Circle, Calendar } from "lucide-react";
 
 interface TemplateProps {
   data: ResumeData;
@@ -15,72 +16,70 @@ const ModernAccentTemplate: React.FC<TemplateProps> = ({ data, hideProfessionalT
         <div className="bg-blue-900 text-white p-8">
           <div className="flex items-center">
             {/* Photo area (placeholder circle) */}
-            <div className="rounded-full bg-white h-20 w-20 flex items-center justify-center text-blue-900 text-2xl font-bold mr-6 overflow-hidden">
+            <div className="rounded-full bg-white h-20 w-20 flex items-center justify-center text-blue-900 text-2xl font-bold mr-6 overflow-hidden border-4 border-blue-700">
               {data.personal.name.charAt(0)}
             </div>
             
             <div>
-              <h1 className="text-2xl font-bold">{data.personal.name}</h1>
+              <h1 className="text-2xl font-bold mb-1">{data.personal.name}</h1>
               {!hideProfessionalTitle && (
-                <p className="text-sm mt-1">{data.personal.title}</p>
+                <p className="text-sm mt-1 opacity-90">{data.personal.title}</p>
               )}
             </div>
           </div>
         </div>
         
         {/* Main content with two columns */}
-        <div className="flex p-8">
+        <div className="flex p-8 gap-8">
           {/* Left column for details and skills (35%) */}
-          <div className="w-[35%] pr-8">
+          <div className="w-[35%]">
             {/* Details section */}
-            <div className="mb-6">
-              <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Details</h2>
-              <div className="space-y-3 text-xs">
-                <div className="flex items-start">
-                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+            <div className="mb-8">
+              <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4">Contact Details</h2>
+              <div className="space-y-4 text-xs">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-3">
+                    <MapPin className="h-4 w-4" />
                   </div>
                   <div>{data.personal.location}</div>
                 </div>
-                <div className="flex items-start">
-                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-3">
+                    <Phone className="h-4 w-4" />
                   </div>
                   <div>{data.personal.phone}</div>
                 </div>
-                <div className="flex items-start">
-                  <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-900 mr-3">
+                    <Mail className="h-4 w-4" />
                   </div>
                   <div>{data.personal.email}</div>
                 </div>
               </div>
             </div>
 
-            {/* Skills with dot indicators */}
+            {/* Skills with improved indicators */}
             {data.skills.length > 0 && (
-              <div className="mb-6">
-                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Skills</h2>
-                <div className="space-y-3">
+              <div className="mb-8">
+                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4">Skills</h2>
+                <div className="space-y-4">
                   {data.skills.map((skill) => (
                     <div key={skill.id}>
-                      <p className="text-xs font-medium text-gray-800 mb-1">{skill.name}</p>
-                      <div className="flex space-x-1">
-                        {[1, 2, 3, 4, 5].map((dot) => (
-                          <div
-                            key={dot}
-                            className={`w-2 h-2 rounded-full ${
-                              dot <= 4 ? "bg-blue-600" : "bg-gray-300"
-                            }`}
-                          ></div>
-                        ))}
+                      <div className="flex justify-between items-center mb-2">
+                        <p className="text-xs font-medium text-gray-800">{skill.name}</p>
+                        <div className="flex space-x-1">
+                          {[1, 2, 3, 4, 5].map((dot) => (
+                            <div
+                              key={dot}
+                              className={`w-2 h-2 rounded-full ${
+                                dot <= 4 ? "bg-blue-600" : "bg-gray-300"
+                              }`}
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                        <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '80%' }}></div>
                       </div>
                     </div>
                   ))}
@@ -91,15 +90,21 @@ const ModernAccentTemplate: React.FC<TemplateProps> = ({ data, hideProfessionalT
             {/* Education */}
             {data.education.length > 0 && (
               <div>
-                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Education</h2>
+                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-2 mb-4">Education</h2>
                 {data.education.map((edu) => (
-                  <div key={edu.id} className="mb-4 text-xs">
-                    <h3 className="font-semibold text-gray-800">{edu.degree}</h3>
-                    <p className="text-gray-700">{edu.school}</p>
-                    <p className="text-gray-600">{edu.location}</p>
-                    <p className="text-gray-600 mt-1">
-                      {formatDateRange(edu.startDate, edu.endDate)}
-                    </p>
+                  <div key={edu.id} className="mb-5 pb-5 border-b border-blue-50 last:border-0 last:pb-0">
+                    <div className="flex items-start mb-2">
+                      <GraduationCap className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-gray-800 text-sm">{edu.degree}</h3>
+                        <p className="text-xs text-gray-700">{edu.school}</p>
+                        <p className="text-xs text-gray-600">{edu.location}</p>
+                        <div className="flex items-center text-xs text-blue-600 mt-1">
+                          <Calendar className="h-3 w-3 mr-1" />
+                          <span>{formatDateRange(edu.startDate, edu.endDate)}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -110,52 +115,75 @@ const ModernAccentTemplate: React.FC<TemplateProps> = ({ data, hideProfessionalT
           <div className="w-[65%]">
             {/* Profile section */}
             {data.personal.summary && (
-              <div className="mb-6">
-                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Profile</h2>
-                <p className="text-xs text-gray-700 leading-relaxed">{data.personal.summary}</p>
+              <div className="mb-8">
+                <div className="flex items-center mb-3">
+                  <User className="h-5 w-5 text-blue-900 mr-2" />
+                  <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 flex-grow">Profile</h2>
+                </div>
+                <p className="text-xs text-gray-700 leading-relaxed pl-7">{data.personal.summary}</p>
               </div>
             )}
 
             {/* Employment History */}
             {data.experience.length > 0 && (
-              <div className="mb-6">
-                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Employment History</h2>
-                {data.experience.map((exp) => (
-                  <div key={exp.id} className="mb-5 relative pl-6 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-blue-100">
-                    <div className="absolute w-3 h-3 rounded-full bg-blue-500 left-[-4px] top-1"></div>
-                    
-                    <div className="flex justify-between items-start mb-1">
-                      <h3 className="text-sm font-semibold text-gray-800">{exp.position}</h3>
-                      <span className="text-xs text-gray-600">
-                        {formatDateRange(exp.startDate, exp.current ? null : exp.endDate)}
-                      </span>
+              <div className="mb-8">
+                <div className="flex items-center mb-3">
+                  <Briefcase className="h-5 w-5 text-blue-900 mr-2" />
+                  <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 flex-grow">Employment History</h2>
+                </div>
+                <div className="space-y-6 mt-4">
+                  {data.experience.map((exp) => (
+                    <div key={exp.id} className="relative pl-7">
+                      <div className="absolute left-0 top-0 bottom-0 w-px bg-blue-200"></div>
+                      <div className="absolute w-3 h-3 rounded-full bg-blue-600 left-[-4px] top-1 border-2 border-white"></div>
+                      
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-sm font-semibold text-gray-800">{exp.position}</h3>
+                        <div className="flex items-center text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                          <Calendar className="h-3 w-3 mr-1" />
+                          <span>
+                            {formatDateRange(exp.startDate, exp.current ? null : exp.endDate)}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-700 mb-2">{exp.company}, {exp.location}</p>
+                      <ul className="list-none text-xs text-gray-700 space-y-1.5">
+                        {exp.bullets.map((bullet, index) => (
+                          <li key={index} className="flex">
+                            <Circle className="h-2 w-2 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="text-xs text-gray-700 mb-2">{exp.company}, {exp.location}</p>
-                    <ul className="list-disc text-xs text-gray-700 ml-4">
-                      {exp.bullets.map((bullet, index) => (
-                        <li key={index} className="mb-1">{bullet}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
 
             {/* Projects */}
             {data.projects.length > 0 && (
               <div>
-                <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 mb-3">Projects</h2>
-                {data.projects.map((project) => (
-                  <div key={project.id} className="mb-4">
-                    <h3 className="text-sm font-semibold text-gray-800 mb-1">{project.name}</h3>
-                    <p className="text-xs text-gray-700 mb-2">{project.description}</p>
-                    <ul className="list-disc text-xs text-gray-700 ml-4">
-                      {project.bullets.map((bullet, index) => (
-                        <li key={index} className="mb-1">{bullet}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                <div className="flex items-center mb-3">
+                  <Award className="h-5 w-5 text-blue-900 mr-2" />
+                  <h2 className="text-sm uppercase font-bold text-blue-900 border-b border-blue-200 pb-1 flex-grow">Projects</h2>
+                </div>
+                <div className="space-y-5 mt-4 pl-7">
+                  {data.projects.map((project) => (
+                    <div key={project.id} className="mb-4">
+                      <h3 className="text-sm font-semibold text-gray-800 mb-2">{project.name}</h3>
+                      <p className="text-xs text-gray-700 mb-2">{project.description}</p>
+                      <ul className="list-none text-xs text-gray-700 space-y-1.5">
+                        {project.bullets.map((bullet, index) => (
+                          <li key={index} className="flex">
+                            <Circle className="h-2 w-2 text-blue-600 mr-2 mt-1 flex-shrink-0" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
