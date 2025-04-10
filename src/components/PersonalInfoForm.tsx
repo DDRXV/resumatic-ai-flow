@@ -59,125 +59,168 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </p>
       </div>
       
-      <div className="form-field-group">
-        <div className="relative">
-          <Label htmlFor="name" className="form-label flex items-center">
-            <User className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Full Name
-          </Label>
-          <Input
-            id="name"
-            name="name"
-            value={data.personal.name}
-            onChange={handleChange}
-            maxLength={50}
-            placeholder="John Doe"
-            className="form-input pl-3 pr-3 py-2.5 shadow-sm"
-          />
+      <div className="form-item-container animate-fade-in">
+        <div className="form-item-header mb-4">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+              <User className="h-4 w-4 text-primary" />
+            </div>
+            <h3 className="form-item-title">
+              Basic Details
+            </h3>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 pb-1">
-          <Label htmlFor="show-title" className="form-label cursor-pointer flex items-center">
-            <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Show Professional Title
-          </Label>
-          <Switch 
-            id="show-title" 
-            checked={showTitle} 
-            onCheckedChange={handleToggleTitle}
-          />
-        </div>
-
-        {showTitle && (
-          <div className="animate-fade-in">
-            <Label htmlFor="title" className="form-label">
-              Professional Title
+        <div className="form-field-group">
+          <div className="relative">
+            <Label htmlFor="name" className="form-label flex items-center">
+              <User className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Full Name
             </Label>
             <Input
-              id="title"
-              name="title"
-              value={data.personal.title}
+              id="name"
+              name="name"
+              value={data.personal.name}
               onChange={handleChange}
               maxLength={50}
-              placeholder="Software Engineer"
+              placeholder="John Doe"
               className="form-input shadow-sm"
             />
           </div>
-        )}
 
-        <div className="relative">
-          <Label htmlFor="email" className="form-label flex items-center">
-            <Mail className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Email
-          </Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            value={data.personal.email}
-            onChange={handleChange}
-            maxLength={50}
-            placeholder="john.doe@example.com"
-            className="form-input shadow-sm"
-          />
+          <div className="flex items-center justify-between pt-2 pb-1">
+            <Label htmlFor="show-title" className="form-label cursor-pointer flex items-center">
+              <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Show Professional Title
+            </Label>
+            <Switch 
+              id="show-title" 
+              checked={showTitle} 
+              onCheckedChange={handleToggleTitle}
+            />
+          </div>
+
+          {showTitle && (
+            <div className="animate-fade-in">
+              <Label htmlFor="title" className="form-label">
+                Professional Title
+              </Label>
+              <Input
+                id="title"
+                name="title"
+                value={data.personal.title}
+                onChange={handleChange}
+                maxLength={50}
+                placeholder="Software Engineer"
+                className="form-input shadow-sm"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="form-item-container animate-fade-in">
+        <div className="form-item-header mb-4">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+              <Mail className="h-4 w-4 text-primary" />
+            </div>
+            <h3 className="form-item-title">
+              Contact Information
+            </h3>
+          </div>
         </div>
 
-        <div className="relative">
-          <Label htmlFor="phone" className="form-label flex items-center">
-            <Phone className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Phone
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            value={data.personal.phone}
-            onChange={handleChange}
-            maxLength={20}
-            placeholder="(123) 456-7890"
-            className="form-input shadow-sm"
-          />
+        <div className="form-field-group">
+          <div className="relative">
+            <Label htmlFor="email" className="form-label flex items-center">
+              <Mail className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Email
+            </Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              value={data.personal.email}
+              onChange={handleChange}
+              maxLength={50}
+              placeholder="john.doe@example.com"
+              className="form-input shadow-sm"
+            />
+          </div>
+
+          <div className="relative">
+            <Label htmlFor="phone" className="form-label flex items-center">
+              <Phone className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Phone
+            </Label>
+            <Input
+              id="phone"
+              name="phone"
+              value={data.personal.phone}
+              onChange={handleChange}
+              maxLength={20}
+              placeholder="(123) 456-7890"
+              className="form-input shadow-sm"
+            />
+          </div>
+
+          <div className="relative">
+            <Label htmlFor="location" className="form-label flex items-center">
+              <MapPin className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Location
+            </Label>
+            <Input
+              id="location"
+              name="location"
+              value={data.personal.location}
+              onChange={handleChange}
+              maxLength={50}
+              placeholder="New York, NY"
+              className="form-input shadow-sm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="form-item-container animate-fade-in">
+        <div className="form-item-header mb-4">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+              <FileText className="h-4 w-4 text-primary" />
+            </div>
+            <h3 className="form-item-title">
+              Professional Summary
+            </h3>
+          </div>
         </div>
 
-        <div className="relative">
-          <Label htmlFor="location" className="form-label flex items-center">
-            <MapPin className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Location
-          </Label>
-          <Input
-            id="location"
-            name="location"
-            value={data.personal.location}
-            onChange={handleChange}
-            maxLength={50}
-            placeholder="New York, NY"
-            className="form-input shadow-sm"
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="summary" className="form-label flex items-center">
-            <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
-            Professional Summary
-          </Label>
-          <Textarea
-            id="summary"
-            name="summary"
-            value={data.personal.summary}
-            onChange={handleChange}
-            maxLength={300}
-            placeholder="Brief summary of your career goals and expertise"
-            rows={4}
-            className="form-input resize-none shadow-sm"
-          />
-          <div className="flex justify-between mt-1.5">
-            <p className="text-xs text-gray-500">
-              {data.personal.summary.length}/300 characters
-            </p>
-            <div className="h-1 w-24 bg-gray-200 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300"
-                style={{ width: `${(data.personal.summary.length / 300) * 100}%` }}
-              ></div>
+        <div className="form-field-group">
+          <div>
+            <Label htmlFor="summary" className="form-label flex items-center">
+              <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
+              Professional Summary
+            </Label>
+            <Textarea
+              id="summary"
+              name="summary"
+              value={data.personal.summary}
+              onChange={handleChange}
+              maxLength={300}
+              placeholder="Brief summary of your career goals and expertise"
+              rows={4}
+              className="form-input resize-none shadow-sm"
+            />
+            <div className="flex justify-between mt-1.5">
+              <p className="text-xs text-gray-500">
+                {data.personal.summary.length}/300 characters
+              </p>
+              <div className="h-1 w-24 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300"
+                  style={{ width: `${(data.personal.summary.length / 300) * 100}%` }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>

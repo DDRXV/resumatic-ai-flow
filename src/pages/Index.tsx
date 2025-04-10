@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { ResumeData, initialResumeData } from "@/components/ResumeSections";
 import ResumePreview from "@/components/ResumePreview";
@@ -40,7 +39,6 @@ const Index = () => {
   const { setSelectedTemplate } = useTemplates();
 
   const handleUpdateData = (data: ResumeData) => {
-    // Check if professional title is empty or not
     setHideProfessionalTitle(!data.personal.title);
     setResumeData(data);
   };
@@ -213,16 +211,14 @@ const Index = () => {
 
   const renderBuilder = () => (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Header */}
       <header className="bg-white border-b py-4 shadow-sm sticky top-0 z-10">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-heading">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-heading mb-4">
               Resumatic AI Builder
             </h1>
             
-            {/* Modern step indicators */}
-            <div className="hidden md:flex items-center">
+            <div className="flex items-center justify-center w-full max-w-2xl mx-auto">
               {sections.map((section, index) => {
                 const currentIndex = sections.findIndex(s => s.id === currentSection);
                 const isActive = section.id === currentSection;
@@ -232,7 +228,7 @@ const Index = () => {
                   <React.Fragment key={section.id}>
                     {index > 0 && (
                       <div 
-                        className={`h-0.5 w-6 mx-1 ${
+                        className={`h-0.5 w-8 mx-1 ${
                           index <= currentIndex ? "bg-gradient-to-r from-primary to-secondary" : "bg-gray-200"
                         } transition-all duration-300`}
                       />
@@ -240,13 +236,12 @@ const Index = () => {
                     <button
                       className={`relative flex items-center justify-center rounded-full transition-all duration-200 ${
                         isActive 
-                          ? "bg-gradient-to-r from-primary to-secondary text-white h-8 w-8 shadow-md" 
+                          ? "bg-gradient-to-r from-primary to-secondary text-white h-10 w-10 shadow-md" 
                           : isCompleted 
-                            ? "bg-primary/15 text-primary h-7 w-7" 
-                            : "bg-gray-100 text-gray-400 h-7 w-7"
+                            ? "bg-primary/15 text-primary h-9 w-9" 
+                            : "bg-gray-100 text-gray-400 h-9 w-9"
                       }`}
                       onClick={() => {
-                        // Only allow going to sections that are before or equal to the current one
                         if (index <= currentIndex) {
                           goToSection(section.id);
                         }
@@ -264,46 +259,17 @@ const Index = () => {
                 );
               })}
             </div>
-            
-            {/* Mobile step indicator */}
-            <div className="flex md:hidden items-center space-x-1.5">
-              {sections.map((section, index) => {
-                const currentIndex = sections.findIndex(s => s.id === currentSection);
-                return (
-                  <button
-                    key={section.id}
-                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                      section.id === currentSection
-                        ? "bg-gradient-to-r from-primary to-secondary scale-110 shadow-sm"
-                        : index <= currentIndex
-                        ? "bg-primary/40"
-                        : "bg-gray-200"
-                    }`}
-                    onClick={() => {
-                      // Only allow going to sections that are before or equal to the current one
-                      if (index <= currentIndex) {
-                        goToSection(section.id);
-                      }
-                    }}
-                    aria-label={`Go to ${section.label} section`}
-                  />
-                );
-              })}
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Main content */}
-      <div className="flex-1 container mx-auto px-4 py-6">
+      <div className="flex-1 container mx-auto px-4 py-8 mt-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Editor panel */}
-          <div ref={editorRef} className="lg:order-1 order-2 overflow-y-auto h-[calc(100vh-10rem)] animate-fade-in">
+          <div ref={editorRef} className="lg:order-1 order-2 overflow-y-auto h-[calc(100vh-12rem)] animate-fade-in">
             <Card className="p-6 shadow-soft rounded-xl border-0 hover:shadow-md transition-all duration-300">{renderForm()}</Card>
           </div>
 
-          {/* Preview panel */}
-          <div className="lg:order-2 order-1 h-[calc(100vh-10rem)] animate-fade-in">
+          <div className="lg:order-2 order-1 h-[calc(100vh-12rem)] animate-fade-in">
             <Card className="h-full overflow-hidden shadow-soft rounded-xl border-0">
               <ResumePreview data={resumeData} hideProfessionalTitle={hideProfessionalTitle} />
             </Card>
