@@ -1,7 +1,7 @@
 
 import * as React from "react";
-import { format, parse } from "date-fns";
-import { Calendar as CalendarIcon, ChevronDown } from "lucide-react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -77,16 +77,16 @@ export function DatePicker({
 
   if (monthYearOnly) {
     return (
-      <div className={cn("flex gap-2 w-full", className)}>
+      <div className={cn("grid grid-cols-2 gap-2 w-full", className)}>
         <Select 
           value={month.toString()} 
           onValueChange={handleMonthChange}
           disabled={disabled}
         >
-          <SelectTrigger className="flex-1 h-9 px-3 py-1 text-sm bg-gray-50 border-gray-200">
+          <SelectTrigger className="h-10 bg-background/50 border-input/50 hover:bg-background/80 transition-colors">
             <SelectValue placeholder="Month" />
           </SelectTrigger>
-          <SelectContent position="popper" className="max-h-[200px] overflow-y-auto">
+          <SelectContent position="popper" className="max-h-[280px] overflow-y-auto">
             {months.map((monthName, index) => (
               <SelectItem key={index} value={index.toString()}>
                 {monthName}
@@ -100,10 +100,10 @@ export function DatePicker({
           onValueChange={handleYearChange}
           disabled={disabled}
         >
-          <SelectTrigger className="flex-1 h-9 px-3 py-1 text-sm bg-gray-50 border-gray-200">
+          <SelectTrigger className="h-10 bg-background/50 border-input/50 hover:bg-background/80 transition-colors">
             <SelectValue placeholder="Year" />
           </SelectTrigger>
-          <SelectContent position="popper" className="max-h-[200px] overflow-y-auto">
+          <SelectContent position="popper" className="max-h-[280px] overflow-y-auto">
             {years.map((year) => (
               <SelectItem key={year} value={year.toString()}>
                 {year}
@@ -121,7 +121,7 @@ export function DatePicker({
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal bg-gray-50 border-gray-200 hover:bg-gray-100",
+            "w-full justify-start text-left font-normal bg-background/50 border-input/50 hover:bg-background/80",
             !date && "text-muted-foreground",
             className
           )}
@@ -132,12 +132,12 @@ export function DatePicker({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <div className="flex gap-2 p-3 border-b">
+        <div className="p-3 border-b flex gap-2">
           <Select value={month.toString()} onValueChange={handleMonthChange}>
-            <SelectTrigger className="flex-1 h-8">
+            <SelectTrigger className="h-8 w-[120px] text-sm">
               <SelectValue placeholder="Month" />
             </SelectTrigger>
-            <SelectContent position="popper">
+            <SelectContent position="popper" className="max-h-[280px] overflow-y-auto">
               {months.map((monthName, index) => (
                 <SelectItem key={index} value={index.toString()}>
                   {monthName}
@@ -147,10 +147,10 @@ export function DatePicker({
           </Select>
           
           <Select value={year.toString()} onValueChange={handleYearChange}>
-            <SelectTrigger className="flex-1 h-8">
+            <SelectTrigger className="h-8 w-[100px] text-sm">
               <SelectValue placeholder="Year" />
             </SelectTrigger>
-            <SelectContent position="popper" className="max-h-[200px] overflow-y-auto">
+            <SelectContent position="popper" className="max-h-[280px] overflow-y-auto">
               {years.map((year) => (
                 <SelectItem key={year} value={year.toString()}>
                   {year}
@@ -168,7 +168,12 @@ export function DatePicker({
             setMonth(date.getMonth());
             setYear(date.getFullYear());
           }}
-          className="p-3 pointer-events-auto"
+          className="p-3 pointer-events-auto rounded-lg"
+          classNames={{
+            day_selected: "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground rounded-full",
+            day_today: "bg-accent text-accent-foreground rounded-full",
+            day: "rounded-full hover:bg-muted transition-colors h-9 w-9"
+          }}
         />
       </PopoverContent>
     </Popover>

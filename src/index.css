@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -153,4 +154,34 @@
 
 .section-dot.upcoming {
   @apply bg-gray-200;
+}
+
+/* Date Picker Styles */
+.rdp-months {
+  @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700;
+}
+
+.rdp-day_today {
+  @apply font-bold bg-primary/10 text-primary;
+}
+
+.rdp-day_selected {
+  @apply bg-primary text-white;
+}
+
+.rdp-day:hover:not(.rdp-day_outside):not(.rdp-day_selected) {
+  @apply bg-muted transition-colors;
+}
+
+.rdp-nav_button {
+  @apply hover:bg-muted transition-colors;
+}
+
+/* Month-Year Picker Style */
+.month-year-picker {
+  @apply grid grid-cols-2 gap-2;
+}
+
+.month-year-picker select {
+  @apply bg-background border border-input rounded-md p-2 text-sm;
 }

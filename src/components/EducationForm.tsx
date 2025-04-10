@@ -3,12 +3,9 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Plus, Trash2 } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { Plus, Trash2 } from "lucide-react";
 import { ResumeData } from "./ResumeSections";
+import { DatePicker } from "@/components/ui/date-picker";
 
 interface EducationFormProps {
   data: ResumeData;
@@ -55,7 +52,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
       <h2 className="text-xl font-bold">Education</h2>
       
       {data.education.map((edu, index) => (
-        <div key={edu.id} className="p-4 border rounded-md space-y-3">
+        <div key={edu.id} className="p-4 border rounded-md space-y-3 bg-background/50 shadow-sm">
           <div className="flex justify-between items-center">
             <h3 className="font-medium">Education #{index + 1}</h3>
             <Button
@@ -63,6 +60,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
               size="icon"
               onClick={() => removeEducation(edu.id)}
               disabled={data.education.length <= 1}
+              className="h-8 w-8"
             >
               <Trash2 className="h-4 w-4" />
             </Button>
@@ -76,6 +74,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
               onChange={(e) => handleChange(edu.id, "school", e.target.value)}
               maxLength={100}
               placeholder="University of Technology"
+              className="bg-background/50 border-input/50"
             />
           </div>
 
@@ -87,6 +86,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
               onChange={(e) => handleChange(edu.id, "degree", e.target.value)}
               maxLength={100}
               placeholder="Bachelor of Science in Computer Science"
+              className="bg-background/50 border-input/50"
             />
           </div>
 
@@ -98,74 +98,29 @@ const EducationForm: React.FC<EducationFormProps> = ({
               onChange={(e) => handleChange(edu.id, "location", e.target.value)}
               maxLength={50}
               placeholder="New York, NY"
+              className="bg-background/50 border-input/50"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Start Date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !edu.startDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {edu.startDate ? (
-                      format(edu.startDate, "MMM yyyy")
-                    ) : (
-                      <span>Select date</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={edu.startDate || undefined}
-                    onSelect={(date) => handleChange(edu.id, "startDate", date)}
-                    captionLayout="dropdown-buttons"
-                    fromYear={1990}
-                    toYear={2030}
-                    className="p-3 pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
+              <DatePicker
+                date={edu.startDate}
+                onDateChange={(date) => handleChange(edu.id, "startDate", date)}
+                placeholder="Select start date"
+                monthYearOnly={true}
+              />
             </div>
 
             <div>
               <Label>End Date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !edu.endDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {edu.endDate ? (
-                      format(edu.endDate, "MMM yyyy")
-                    ) : (
-                      <span>Select date</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={edu.endDate || undefined}
-                    onSelect={(date) => handleChange(edu.id, "endDate", date)}
-                    captionLayout="dropdown-buttons"
-                    fromYear={1990}
-                    toYear={2030}
-                    className="p-3 pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
+              <DatePicker
+                date={edu.endDate}
+                onDateChange={(date) => handleChange(edu.id, "endDate", date)}
+                placeholder="Select end date"
+                monthYearOnly={true}
+              />
             </div>
           </div>
         </div>
@@ -174,14 +129,14 @@ const EducationForm: React.FC<EducationFormProps> = ({
       {data.education.length < 3 && (
         <Button
           variant="outline"
-          className="w-full"
+          className="w-full border-dashed hover:border-primary/50 hover:bg-primary/5 transition-colors"
           onClick={addEducation}
         >
           <Plus className="h-4 w-4 mr-2" /> Add Education
         </Button>
       )}
 
-      <div className="flex justify-between">
+      <div className="flex justify-between pt-2">
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>

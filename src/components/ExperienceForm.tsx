@@ -4,13 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Plus, Trash2, X } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { Plus, Trash2, X } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ResumeData } from "./ResumeSections";
+import { DatePicker } from "@/components/ui/date-picker";
 
 interface ExperienceFormProps {
   data: ResumeData;
@@ -110,7 +107,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
       <h2 className="text-xl font-bold">Experience</h2>
       
       {data.experience.map((exp, index) => (
-        <div key={exp.id} className="p-4 border rounded-md space-y-3">
+        <div key={exp.id} className="p-4 border rounded-md space-y-3 bg-background/50 shadow-sm">
           <div className="flex justify-between items-center">
             <h3 className="font-medium">Experience #{index + 1}</h3>
             <Button
@@ -118,6 +115,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
               size="icon"
               onClick={() => removeExperience(exp.id)}
               disabled={data.experience.length <= 1}
+              className="h-8 w-8"
             >
               <Trash2 className="h-4 w-4" />
             </Button>
@@ -131,6 +129,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
               onChange={(e) => handleChange(exp.id, "position", e.target.value)}
               maxLength={50}
               placeholder="Software Engineer"
+              className="bg-background/50 border-input/50"
             />
           </div>
 
@@ -142,6 +141,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
               onChange={(e) => handleChange(exp.id, "company", e.target.value)}
               maxLength={50}
               placeholder="Tech Solutions Inc."
+              className="bg-background/50 border-input/50"
             />
           </div>
 
@@ -153,6 +153,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
               onChange={(e) => handleChange(exp.id, "location", e.target.value)}
               maxLength={50}
               placeholder="New York, NY"
+              className="bg-background/50 border-input/50"
             />
           </div>
 
@@ -166,7 +167,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
             />
             <Label
               htmlFor={`current-${exp.id}`}
-              className="cursor-pointer"
+              className="cursor-pointer text-sm"
             >
               I currently work here
             </Label>
@@ -175,69 +176,23 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label>Start Date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !exp.startDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {exp.startDate ? (
-                      format(exp.startDate, "MMM yyyy")
-                    ) : (
-                      <span>Select date</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={exp.startDate || undefined}
-                    onSelect={(date) => handleChange(exp.id, "startDate", date)}
-                    captionLayout="dropdown-buttons"
-                    fromYear={1990}
-                    toYear={2030}
-                    className="p-3 pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
+              <DatePicker
+                date={exp.startDate}
+                onDateChange={(date) => handleChange(exp.id, "startDate", date)}
+                placeholder="Select start date"
+                monthYearOnly={true}
+              />
             </div>
 
             <div>
               <Label>End Date</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !exp.endDate && "text-muted-foreground"
-                    )}
-                    disabled={exp.current}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {exp.endDate ? (
-                      format(exp.endDate, "MMM yyyy")
-                    ) : (
-                      <span>{exp.current ? "Present" : "Select date"}</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={exp.endDate || undefined}
-                    onSelect={(date) => handleChange(exp.id, "endDate", date)}
-                    captionLayout="dropdown-buttons"
-                    fromYear={1990}
-                    toYear={2030}
-                    className="p-3 pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
+              <DatePicker
+                date={exp.endDate}
+                onDateChange={(date) => handleChange(exp.id, "endDate", date)}
+                placeholder="Select end date"
+                monthYearOnly={true}
+                disabled={exp.current}
+              />
             </div>
           </div>
 
@@ -250,13 +205,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                   onChange={(e) => handleBulletChange(exp.id, idx, e.target.value)}
                   placeholder="Describe your responsibilities and achievements"
                   maxLength={100}
-                  className="min-h-[60px]"
+                  className="min-h-[60px] bg-background/50 border-input/50"
                 />
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => removeBullet(exp.id, idx)}
                   disabled={exp.bullets.length <= 1}
+                  className="h-8 w-8 mt-1 self-start"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -266,7 +222,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
               <Button
                 variant="outline"
                 size="sm"
-                className="mt-2"
+                className="mt-2 border-dashed hover:border-primary/50 hover:bg-primary/5 transition-colors"
                 onClick={() => addBullet(exp.id)}
               >
                 <Plus className="h-3 w-3 mr-1" /> Add Bullet
@@ -282,14 +238,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
       {data.experience.length < 3 && (
         <Button
           variant="outline"
-          className="w-full"
+          className="w-full border-dashed hover:border-primary/50 hover:bg-primary/5 transition-colors"
           onClick={addExperience}
         >
           <Plus className="h-4 w-4 mr-2" /> Add Experience
         </Button>
       )}
 
-      <div className="flex justify-between">
+      <div className="flex justify-between pt-2">
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
