@@ -9,15 +9,24 @@ interface ResumePreviewProps {
 const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
   return (
     <div className="w-full h-full overflow-auto bg-white rounded-md shadow-md p-6 resume-preview">
-      <div className="resume-paper max-w-[8.5in] mx-auto">
-        {/* Header/Personal Info */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-resume-heading">{data.personal.name}</h1>
-          <p className="text-resume-subheading">{data.personal.title}</p>
-          <div className="text-resume-text text-sm mt-2 flex justify-center flex-wrap gap-x-4">
-            <span>{data.personal.email}</span>
-            <span>{data.personal.phone}</span>
-            <span>{data.personal.location}</span>
+      <div className="resume-paper max-w-[8.5in] mx-auto bg-white p-6">
+        {/* Header/Personal Info with design accent */}
+        <div className="mb-4 pb-2 border-b-2 border-resume-accent">
+          <h1 className="text-xl font-bold text-resume-heading">{data.personal.name}</h1>
+          <p className="text-sm font-medium text-resume-secondary">{data.personal.title}</p>
+          <div className="text-xs mt-1 flex flex-wrap gap-x-3 text-resume-text">
+            <span className="flex items-center">
+              <span className="inline-block w-1 h-1 rounded-full bg-resume-accent mr-1"></span>
+              {data.personal.email}
+            </span>
+            <span className="flex items-center">
+              <span className="inline-block w-1 h-1 rounded-full bg-resume-tertiary mr-1"></span>
+              {data.personal.phone}
+            </span>
+            <span className="flex items-center">
+              <span className="inline-block w-1 h-1 rounded-full bg-resume-secondary mr-1"></span>
+              {data.personal.location}
+            </span>
           </div>
         </div>
 
@@ -37,15 +46,15 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
               <div key={exp.id} className="resume-item">
                 <div className="flex justify-between items-start">
                   <h3 className="resume-subheading">{exp.position}</h3>
-                  <span className="text-sm text-resume-text">
+                  <span className="resume-date">
                     {formatDateRange(exp.startDate, exp.current ? null : exp.endDate)}
                   </span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <p className="text-sm font-medium text-resume-subheading">{exp.company}</p>
-                  <p className="text-sm text-resume-text">{exp.location}</p>
+                  <p className="text-xs font-medium text-resume-text">{exp.company}</p>
+                  <p className="resume-location">{exp.location}</p>
                 </div>
-                <ul className="list-disc ml-5 mt-1">
+                <ul className="list-disc ml-4 mt-1">
                   {exp.bullets.map((bullet, index) => (
                     <li key={index} className="resume-text resume-bullet">
                       {bullet}
@@ -65,26 +74,30 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
               <div key={edu.id} className="resume-item">
                 <div className="flex justify-between items-start">
                   <h3 className="resume-subheading">{edu.school}</h3>
-                  <span className="text-sm text-resume-text">
+                  <span className="resume-date">
                     {formatDateRange(edu.startDate, edu.endDate)}
                   </span>
                 </div>
                 <div className="flex justify-between items-start">
-                  <p className="text-sm font-medium text-resume-text">{edu.degree}</p>
-                  <p className="text-sm text-resume-text">{edu.location}</p>
+                  <p className="text-xs font-medium text-resume-text">{edu.degree}</p>
+                  <p className="resume-location">{edu.location}</p>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Skills */}
+        {/* Skills with modern design */}
         {data.skills.length > 0 && (
           <div className="resume-section">
             <h2 className="resume-heading">Skills</h2>
-            <p className="resume-text">
-              {data.skills.map((skill) => skill.name).join(", ")}
-            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {data.skills.map((skill) => (
+                <span key={skill.id} className="text-xs px-2 py-0.5 rounded-full bg-resume-light text-resume-text">
+                  {skill.name}
+                </span>
+              ))}
+            </div>
           </div>
         )}
 
@@ -95,8 +108,8 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data }) => {
             {data.projects.map((project) => (
               <div key={project.id} className="resume-item">
                 <h3 className="resume-subheading">{project.name}</h3>
-                <p className="text-sm text-resume-text mb-1">{project.description}</p>
-                <ul className="list-disc ml-5">
+                <p className="text-xs text-resume-text mb-1">{project.description}</p>
+                <ul className="list-disc ml-4">
                   {project.bullets.map((bullet, index) => (
                     <li key={index} className="resume-text resume-bullet">
                       {bullet}

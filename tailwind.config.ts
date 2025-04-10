@@ -20,9 +20,9 @@ export default {
 		},
 		extend: {
 			spacing: {
-				'resume-sectionGap': '1.25rem',
-				'resume-itemGap': '0.75rem',
-				'resume-lineGap': '0.25rem',
+				'resume-sectionGap': '1rem',
+				'resume-itemGap': '0.5rem',
+				'resume-lineGap': '0.2rem',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -73,10 +73,10 @@ export default {
 					subheading: '#334155',
 					text: '#475569',
 					accent: '#3b82f6',
+					secondary: '#8b5cf6',
+					tertiary: '#ec4899',
+					light: '#f1f5f9',
 					background: '#ffffff',
-					sectionGap: '1.25rem',
-					itemGap: '0.75rem',
-					lineGap: '0.25rem'
 				}
 			},
 			borderRadius: {
@@ -86,25 +86,26 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite'
+			},
+			boxShadow: {
+				'soft': '0 2px 15px rgba(0, 0, 0, 0.06)',
+				'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
 			}
 		}
 	},
