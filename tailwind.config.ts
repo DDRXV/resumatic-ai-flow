@@ -19,6 +19,11 @@ export default {
 			}
 		},
 		extend: {
+			spacing: {
+				'resume-sectionGap': '1.25rem',
+				'resume-itemGap': '0.75rem',
+				'resume-lineGap': '0.25rem',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

@@ -5,7 +5,7 @@ import { ResumeData } from "./ResumeSections";
 import { Check, Download, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { jsPDF } from "jspdf"; // Updated import syntax
 
 interface FinishFormProps {
   data: ResumeData;
