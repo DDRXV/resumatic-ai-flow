@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Plus, Trash2, GraduationCap, Calendar, MapPin, School } from "lucide-react";
 import { ResumeData } from "./ResumeSections";
 import { DatePicker } from "@/components/ui/date-picker";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface EducationFormProps {
   data: ResumeData;
@@ -48,118 +49,104 @@ const EducationForm: React.FC<EducationFormProps> = ({
   };
 
   return (
-    <div className="space-y-5">
-      <div>
-        <h2 className="form-section-title bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+    <div className="space-y-6">
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
           Education
         </h2>
-        <p className="form-section-subtitle">
+        <p className="text-slate-500">
           Add your educational background
         </p>
       </div>
       
       {data.education.map((edu, index) => (
-        <div key={edu.id} className="form-item-container animate-fade-in">
-          <div className="form-item-header">
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-                <GraduationCap className="h-4 w-4 text-primary" />
+        <Card key={edu.id} className="animate-scale-in border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 mb-4">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                  <GraduationCap className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="font-medium">
+                  {edu.school ? edu.school : `Education ${index + 1}`}
+                </h3>
               </div>
-              <h3 className="form-item-title">
-                Education {index + 1}
-                {edu.school && <span className="ml-1 text-gray-400">• {edu.school}</span>}
-              </h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => removeEducation(edu.id)}
+                disabled={data.education.length <= 1}
+                className="h-8 w-8 text-gray-400 hover:text-red-500 transition-colors"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => removeEducation(edu.id)}
-              disabled={data.education.length <= 1}
-              className="h-8 w-8 text-gray-400 hover:text-red-500 transition-colors"
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          </div>
 
-          <div className="form-field-group">
-            <div>
-              <Label htmlFor={`school-${edu.id}`} className="form-label flex items-center">
-                <School className="h-3.5 w-3.5 mr-1.5 text-primary" /> School/University
-              </Label>
+            <div className="space-y-5">
               <div className="relative">
                 <Input
                   id={`school-${edu.id}`}
                   value={edu.school}
                   onChange={(e) => handleChange(edu.id, "school", e.target.value)}
                   maxLength={100}
-                  placeholder="University of Technology"
-                  className="form-input pl-9"
+                  placeholder="University/School Name"
+                  className="pl-9 border-slate-200"
                 />
-                <School className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                <School className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
               </div>
-            </div>
 
-            <div>
-              <Label htmlFor={`degree-${edu.id}`} className="form-label flex items-center">
-                <GraduationCap className="h-3.5 w-3.5 mr-1.5 text-primary" /> Degree
-              </Label>
               <div className="relative">
                 <Input
                   id={`degree-${edu.id}`}
                   value={edu.degree}
                   onChange={(e) => handleChange(edu.id, "degree", e.target.value)}
                   maxLength={100}
-                  placeholder="Bachelor of Science in Computer Science"
-                  className="form-input pl-9"
+                  placeholder="Degree/Certificate"
+                  className="pl-9 border-slate-200"
                 />
-                <GraduationCap className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                <GraduationCap className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
               </div>
-            </div>
 
-            <div>
-              <Label htmlFor={`location-${edu.id}`} className="form-label flex items-center">
-                <MapPin className="h-3.5 w-3.5 mr-1.5 text-primary" /> Location
-              </Label>
               <div className="relative">
                 <Input
                   id={`location-${edu.id}`}
                   value={edu.location}
                   onChange={(e) => handleChange(edu.id, "location", e.target.value)}
                   maxLength={50}
-                  placeholder="New York, NY"
-                  className="form-input pl-9"
+                  placeholder="Location"
+                  className="pl-9 border-slate-200"
                 />
-                <MapPin className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-              <div>
-                <Label className="form-label flex items-center">
-                  <Calendar className="h-3.5 w-3.5 mr-1.5 text-primary" /> Start Date
-                </Label>
-                <DatePicker
-                  date={edu.startDate}
-                  onDateChange={(date) => handleChange(edu.id, "startDate", date)}
-                  placeholder="Select start date"
-                  monthYearOnly={true}
-                />
+                <MapPin className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
               </div>
 
-              <div>
-                <Label className="form-label flex items-center">
-                  <Calendar className="h-3.5 w-3.5 mr-1.5 text-primary" /> End Date
-                </Label>
-                <DatePicker
-                  date={edu.endDate}
-                  onDateChange={(date) => handleChange(edu.id, "endDate", date)}
-                  placeholder="Select end date"
-                  monthYearOnly={true}
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <div className="flex items-center mb-2 text-sm text-slate-600">
+                    <Calendar className="h-3.5 w-3.5 mr-1.5 text-primary" /> Start Date
+                  </div>
+                  <DatePicker
+                    date={edu.startDate}
+                    onDateChange={(date) => handleChange(edu.id, "startDate", date)}
+                    placeholder="Select start date"
+                    monthYearOnly={true}
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center mb-2 text-sm text-slate-600">
+                    <Calendar className="h-3.5 w-3.5 mr-1.5 text-primary" /> End Date
+                  </div>
+                  <DatePicker
+                    date={edu.endDate}
+                    onDateChange={(date) => handleChange(edu.id, "endDate", date)}
+                    placeholder="Select end date"
+                    monthYearOnly={true}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       ))}
 
       {data.education.length < 3 && (
@@ -173,8 +160,8 @@ const EducationForm: React.FC<EducationFormProps> = ({
         </Button>
       )}
 
-      <div className="form-buttons">
-        <Button variant="outline" onClick={onBack} className="form-button-back">
+      <div className="flex justify-between mt-8 pt-4 border-t border-slate-200">
+        <Button variant="outline" onClick={onBack} className="flex items-center">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-4 w-4 mr-1.5" 
@@ -189,8 +176,11 @@ const EducationForm: React.FC<EducationFormProps> = ({
           </svg>
           Back
         </Button>
-        <Button onClick={onNext} className="form-button-next">
-          Continue to Experience
+        <Button 
+          onClick={onNext} 
+          className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all"
+        >
+          Continue
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-4 w-4 ml-1.5" 
