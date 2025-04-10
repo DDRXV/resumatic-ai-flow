@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { ResumeData } from "./ResumeSections";
 import { Switch } from "@/components/ui/switch";
 import { User, Mail, Phone, MapPin, FileText } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface PersonalInfoFormProps {
   data: ResumeData;
@@ -49,173 +51,189 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
   };
 
   return (
-    <div className="space-y-5">
-      <div>
-        <h2 className="form-section-title bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+    <div className="space-y-6">
+      <div className="mb-8">
+        <h2 className="form-section-title text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
           Personal Information
         </h2>
-        <p className="form-section-subtitle">
+        <p className="form-section-subtitle text-slate-500">
           Let's start with the basics about you
         </p>
       </div>
       
-      <div className="form-item-container animate-fade-in">
-        <div className="form-item-header mb-4">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-              <User className="h-4 w-4 text-primary" />
+      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <User className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="form-item-title">
+            <h3 className="form-item-title text-lg font-medium">
               Basic Details
             </h3>
           </div>
-        </div>
-
-        <div className="form-field-group">
-          <div className="relative">
-            <Label htmlFor="name" className="form-label flex items-center">
-              <User className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Full Name
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              value={data.personal.name}
-              onChange={handleChange}
-              maxLength={50}
-              placeholder="John Doe"
-              className="form-input shadow-sm"
-            />
-          </div>
-
-          <div className="flex items-center justify-between pt-2 pb-1">
-            <Label htmlFor="show-title" className="form-label cursor-pointer flex items-center">
-              <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Show Professional Title
-            </Label>
-            <Switch 
-              id="show-title" 
-              checked={showTitle} 
-              onCheckedChange={handleToggleTitle}
-            />
-          </div>
-
-          {showTitle && (
-            <div className="animate-fade-in">
-              <Label htmlFor="title" className="form-label">
-                Professional Title
+        </CardHeader>
+        
+        <CardContent className="pt-6 space-y-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="font-medium text-slate-700 flex items-center">
+                <User className="h-4 w-4 mr-2 text-primary" /> Full Name
               </Label>
-              <Input
-                id="title"
-                name="title"
-                value={data.personal.title}
-                onChange={handleChange}
-                maxLength={50}
-                placeholder="Software Engineer"
-                className="form-input shadow-sm"
+              <div className="relative">
+                <Input
+                  id="name"
+                  name="name"
+                  value={data.personal.name}
+                  onChange={handleChange}
+                  maxLength={50}
+                  placeholder="John Doe"
+                  className="form-input pl-9 border-slate-200 shadow-sm"
+                />
+                <User className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              <Label htmlFor="show-title" className="font-medium text-slate-700 cursor-pointer flex items-center">
+                <FileText className="h-4 w-4 mr-2 text-primary" /> Show Professional Title
+              </Label>
+              <Switch 
+                id="show-title" 
+                checked={showTitle} 
+                onCheckedChange={handleToggleTitle}
               />
             </div>
-          )}
-        </div>
-      </div>
 
-      <div className="form-item-container animate-fade-in">
-        <div className="form-item-header mb-4">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-              <Mail className="h-4 w-4 text-primary" />
+            {showTitle && (
+              <div className="animate-fade-in space-y-2">
+                <Label htmlFor="title" className="font-medium text-slate-700 flex items-center">
+                  <FileText className="h-4 w-4 mr-2 text-primary" /> Professional Title
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="title"
+                    name="title"
+                    value={data.personal.title}
+                    onChange={handleChange}
+                    maxLength={50}
+                    placeholder="Software Engineer"
+                    className="form-input pl-9 border-slate-200 shadow-sm"
+                  />
+                  <FileText className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Mail className="h-5 w-5 text-primary" />
             </div>
-            <h3 className="form-item-title">
+            <h3 className="form-item-title text-lg font-medium">
               Contact Information
             </h3>
           </div>
-        </div>
-
-        <div className="form-field-group">
-          <div className="relative">
-            <Label htmlFor="email" className="form-label flex items-center">
-              <Mail className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={data.personal.email}
-              onChange={handleChange}
-              maxLength={50}
-              placeholder="john.doe@example.com"
-              className="form-input shadow-sm"
-            />
-          </div>
-
-          <div className="relative">
-            <Label htmlFor="phone" className="form-label flex items-center">
-              <Phone className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Phone
-            </Label>
-            <Input
-              id="phone"
-              name="phone"
-              value={data.personal.phone}
-              onChange={handleChange}
-              maxLength={20}
-              placeholder="(123) 456-7890"
-              className="form-input shadow-sm"
-            />
-          </div>
-
-          <div className="relative">
-            <Label htmlFor="location" className="form-label flex items-center">
-              <MapPin className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Location
-            </Label>
-            <Input
-              id="location"
-              name="location"
-              value={data.personal.location}
-              onChange={handleChange}
-              maxLength={50}
-              placeholder="New York, NY"
-              className="form-input shadow-sm"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="form-item-container animate-fade-in">
-        <div className="form-item-header mb-4">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">
-              <FileText className="h-4 w-4 text-primary" />
+        </CardHeader>
+        
+        <CardContent className="pt-6 space-y-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="font-medium text-slate-700 flex items-center">
+                <Mail className="h-4 w-4 mr-2 text-primary" /> Email
+              </Label>
+              <div className="relative">
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={data.personal.email}
+                  onChange={handleChange}
+                  maxLength={50}
+                  placeholder="john.doe@example.com"
+                  className="form-input pl-9 border-slate-200 shadow-sm"
+                />
+                <Mail className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              </div>
             </div>
-            <h3 className="form-item-title">
+
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="font-medium text-slate-700 flex items-center">
+                <Phone className="h-4 w-4 mr-2 text-primary" /> Phone
+              </Label>
+              <div className="relative">
+                <Input
+                  id="phone"
+                  name="phone"
+                  value={data.personal.phone}
+                  onChange={handleChange}
+                  maxLength={20}
+                  placeholder="(123) 456-7890"
+                  className="form-input pl-9 border-slate-200 shadow-sm"
+                />
+                <Phone className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location" className="font-medium text-slate-700 flex items-center">
+                <MapPin className="h-4 w-4 mr-2 text-primary" /> Location
+              </Label>
+              <div className="relative">
+                <Input
+                  id="location"
+                  name="location"
+                  value={data.personal.location}
+                  onChange={handleChange}
+                  maxLength={50}
+                  placeholder="New York, NY"
+                  className="form-input pl-9 border-slate-200 shadow-sm"
+                />
+                <MapPin className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <FileText className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="form-item-title text-lg font-medium">
               Professional Summary
             </h3>
           </div>
-        </div>
-
-        <div className="form-field-group">
-          <div>
-            <Label htmlFor="summary" className="form-label flex items-center">
-              <FileText className="h-3.5 w-3.5 mr-1.5 text-primary" />
-              Professional Summary
+        </CardHeader>
+        
+        <CardContent className="pt-6 space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="summary" className="font-medium text-slate-700 flex items-center">
+              <FileText className="h-4 w-4 mr-2 text-primary" /> Professional Summary
             </Label>
-            <Textarea
-              id="summary"
-              name="summary"
-              value={data.personal.summary}
-              onChange={handleChange}
-              maxLength={300}
-              placeholder="Brief summary of your career goals and expertise"
-              rows={4}
-              className="form-input resize-none shadow-sm"
-            />
+            <div className="relative">
+              <Textarea
+                id="summary"
+                name="summary"
+                value={data.personal.summary}
+                onChange={handleChange}
+                maxLength={300}
+                placeholder="Brief summary of your career goals and expertise"
+                rows={4}
+                className="form-input resize-none shadow-sm border-slate-200 pt-3 pl-9"
+              />
+              <FileText className="h-4 w-4 text-slate-400 absolute left-3 top-8" />
+            </div>
             <div className="flex justify-between mt-1.5">
               <p className="text-xs text-gray-500">
                 {data.personal.summary.length}/300 characters
               </p>
-              <div className="h-1 w-24 bg-gray-200 rounded-full overflow-hidden">
+              <div className="h-1.5 w-24 bg-slate-100 rounded-full overflow-hidden">
                 <div 
                   className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300"
                   style={{ width: `${(data.personal.summary.length / 300) * 100}%` }}
@@ -223,10 +241,10 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
-      <div className="form-buttons">
+      <div className="form-buttons mt-8 pt-4 border-t border-slate-200">
         <div></div> {/* Empty div for flex spacing */}
         <Button 
           onClick={onNext} 
