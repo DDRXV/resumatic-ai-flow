@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ResumeData, formatDateRange } from "./ResumeSections";
 
@@ -12,7 +11,7 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTit
     <div className="w-full h-full overflow-auto bg-white rounded-md shadow-md p-6 resume-preview">
       <div className="resume-paper max-w-[8.5in] mx-auto bg-white px-12 py-6"> 
         {/* Header/Personal Info with clean, minimal design */}
-        <div className="mb-3 pb-1 border-b border-resume-accent"> 
+        <div className="mb-2"> {/* Removed border, reduced bottom margin */}
           <h1 className="text-lg font-bold text-resume-heading">{data.personal.name}</h1>
           {!hideProfessionalTitle && (
             <p className="text-xs font-medium text-resume-accent">{data.personal.title}</p>
@@ -30,7 +29,7 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTit
 
         {/* Summary */}
         {data.personal.summary && (
-          <div className="resume-section">
+          <div className="resume-section mt-2"> {/* Reduced top margin to bring summary closer */}
             <h2 className="resume-heading">Summary</h2>
             <p className="resume-text">{data.personal.summary}</p>
           </div>
@@ -52,7 +51,7 @@ const ResumePreview: React.FC<ResumePreviewProps> = ({ data, hideProfessionalTit
                   <p className="text-xs font-medium text-resume-text">{exp.company}</p>
                   <p className="resume-location">{exp.location}</p>
                 </div>
-                <ul className="list-disc ml-4 mt-1">
+                <ul className="list-disc ml-4 mt-1 pl-1"> {/* Added pl-1 to align bullets better */}
                   {exp.bullets.map((bullet, index) => (
                     <li key={index} className="resume-text resume-bullet">
                       {bullet}
