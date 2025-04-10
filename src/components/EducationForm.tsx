@@ -2,7 +2,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Plus, Trash2, GraduationCap, Calendar, MapPin, School } from "lucide-react";
 import { ResumeData } from "./ResumeSections";
 import { DatePicker } from "@/components/ui/date-picker";
