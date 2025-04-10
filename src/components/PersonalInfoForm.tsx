@@ -7,8 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ResumeData } from "./ResumeSections";
 import { Switch } from "@/components/ui/switch";
 import { User, Mail, Phone, MapPin, FileText } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface PersonalInfoFormProps {
   data: ResumeData;
@@ -52,51 +51,46 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="mb-8">
-        <h2 className="form-section-title text-2xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
           Personal Information
         </h2>
-        <p className="form-section-subtitle text-slate-500">
+        <p className="text-slate-500">
           Let's start with the basics about you
         </p>
       </div>
       
-      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <User className="h-5 w-5 text-primary" />
+      {/* Basic Details Card */}
+      <Card className="animate-scale-in border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+        <CardContent className="pt-5 pb-5">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <User className="h-4 w-4 text-primary" />
             </div>
-            <h3 className="form-item-title text-lg font-medium">
-              Basic Details
-            </h3>
+            <h3 className="text-lg font-medium">Basic Details</h3>
           </div>
-        </CardHeader>
-        
-        <CardContent className="pt-6 space-y-6">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="font-medium text-slate-700 flex items-center">
-                <User className="h-4 w-4 mr-2 text-primary" /> Full Name
-              </Label>
-              <div className="relative">
-                <Input
-                  id="name"
-                  name="name"
-                  value={data.personal.name}
-                  onChange={handleChange}
-                  maxLength={50}
-                  placeholder="John Doe"
-                  className="form-input pl-9 border-slate-200 shadow-sm"
-                />
-                <User className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              </div>
+
+          <div className="space-y-5">
+            {/* Name Input */}
+            <div className="relative">
+              <Input
+                id="name"
+                name="name"
+                value={data.personal.name}
+                onChange={handleChange}
+                maxLength={50}
+                placeholder="Full Name"
+                className="pl-9 border-slate-200"
+              />
+              <User className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             </div>
 
-            <div className="flex items-center justify-between pt-2">
-              <Label htmlFor="show-title" className="font-medium text-slate-700 cursor-pointer flex items-center">
-                <FileText className="h-4 w-4 mr-2 text-primary" /> Show Professional Title
-              </Label>
+            {/* Professional Title Toggle */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileText className="h-4 w-4 text-primary" />
+                <span className="text-slate-700">Professional Title</span>
+              </div>
               <Switch 
                 id="show-title" 
                 checked={showTitle} 
@@ -104,118 +98,93 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
               />
             </div>
 
+            {/* Professional Title Input (conditional) */}
             {showTitle && (
-              <div className="animate-fade-in space-y-2">
-                <Label htmlFor="title" className="font-medium text-slate-700 flex items-center">
-                  <FileText className="h-4 w-4 mr-2 text-primary" /> Professional Title
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="title"
-                    name="title"
-                    value={data.personal.title}
-                    onChange={handleChange}
-                    maxLength={50}
-                    placeholder="Software Engineer"
-                    className="form-input pl-9 border-slate-200 shadow-sm"
-                  />
-                  <FileText className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                </div>
+              <div className="animate-fade-in relative">
+                <Input
+                  id="title"
+                  name="title"
+                  value={data.personal.title}
+                  onChange={handleChange}
+                  maxLength={50}
+                  placeholder="Software Engineer"
+                  className="pl-9 border-slate-200"
+                />
+                <FileText className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
               </div>
             )}
           </div>
         </CardContent>
       </Card>
 
-      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Mail className="h-5 w-5 text-primary" />
+      {/* Contact Information Card */}
+      <Card className="animate-scale-in border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+        <CardContent className="pt-5 pb-5">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <Mail className="h-4 w-4 text-primary" />
             </div>
-            <h3 className="form-item-title text-lg font-medium">
-              Contact Information
-            </h3>
+            <h3 className="text-lg font-medium">Contact Information</h3>
           </div>
-        </CardHeader>
-        
-        <CardContent className="pt-6 space-y-6">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="font-medium text-slate-700 flex items-center">
-                <Mail className="h-4 w-4 mr-2 text-primary" /> Email
-              </Label>
-              <div className="relative">
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={data.personal.email}
-                  onChange={handleChange}
-                  maxLength={50}
-                  placeholder="john.doe@example.com"
-                  className="form-input pl-9 border-slate-200 shadow-sm"
-                />
-                <Mail className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              </div>
+
+          <div className="space-y-5">
+            {/* Email Input */}
+            <div className="relative">
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={data.personal.email}
+                onChange={handleChange}
+                maxLength={50}
+                placeholder="Email"
+                className="pl-9 border-slate-200"
+              />
+              <Mail className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="font-medium text-slate-700 flex items-center">
-                <Phone className="h-4 w-4 mr-2 text-primary" /> Phone
-              </Label>
-              <div className="relative">
-                <Input
-                  id="phone"
-                  name="phone"
-                  value={data.personal.phone}
-                  onChange={handleChange}
-                  maxLength={20}
-                  placeholder="(123) 456-7890"
-                  className="form-input pl-9 border-slate-200 shadow-sm"
-                />
-                <Phone className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              </div>
+            {/* Phone Input */}
+            <div className="relative">
+              <Input
+                id="phone"
+                name="phone"
+                value={data.personal.phone}
+                onChange={handleChange}
+                maxLength={20}
+                placeholder="Phone"
+                className="pl-9 border-slate-200"
+              />
+              <Phone className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="location" className="font-medium text-slate-700 flex items-center">
-                <MapPin className="h-4 w-4 mr-2 text-primary" /> Location
-              </Label>
-              <div className="relative">
-                <Input
-                  id="location"
-                  name="location"
-                  value={data.personal.location}
-                  onChange={handleChange}
-                  maxLength={50}
-                  placeholder="New York, NY"
-                  className="form-input pl-9 border-slate-200 shadow-sm"
-                />
-                <MapPin className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-              </div>
+            {/* Location Input */}
+            <div className="relative">
+              <Input
+                id="location"
+                name="location"
+                value={data.personal.location}
+                onChange={handleChange}
+                maxLength={50}
+                placeholder="Location"
+                className="pl-9 border-slate-200"
+              />
+              <MapPin className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             </div>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="animate-scale-in border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <FileText className="h-5 w-5 text-primary" />
+      {/* Professional Summary Card */}
+      <Card className="animate-scale-in border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+        <CardContent className="pt-5 pb-5">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <FileText className="h-4 w-4 text-primary" />
             </div>
-            <h3 className="form-item-title text-lg font-medium">
-              Professional Summary
-            </h3>
+            <h3 className="text-lg font-medium">Professional Summary</h3>
           </div>
-        </CardHeader>
-        
-        <CardContent className="pt-6 space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="summary" className="font-medium text-slate-700 flex items-center">
-              <FileText className="h-4 w-4 mr-2 text-primary" /> Professional Summary
-            </Label>
+          
+          <div className="space-y-1">
             <div className="relative">
               <Textarea
                 id="summary"
@@ -225,13 +194,14 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
                 maxLength={300}
                 placeholder="Brief summary of your career goals and expertise"
                 rows={4}
-                className="form-input resize-none shadow-sm border-slate-200 pt-3 pl-9"
+                className="resize-none pt-3 pl-9 border-slate-200"
               />
               <FileText className="h-4 w-4 text-slate-400 absolute left-3 top-8" />
             </div>
-            <div className="flex justify-between mt-1.5">
+            
+            <div className="flex justify-between items-center mt-2">
               <p className="text-xs text-gray-500">
-                {data.personal.summary.length}/300 characters
+                {data.personal.summary.length}/300
               </p>
               <div className="h-1.5 w-24 bg-slate-100 rounded-full overflow-hidden">
                 <div 
@@ -244,13 +214,13 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </CardContent>
       </Card>
 
-      <div className="form-buttons mt-8 pt-4 border-t border-slate-200">
-        <div></div> {/* Empty div for flex spacing */}
+      {/* Navigation Button */}
+      <div className="flex justify-end mt-8 pt-4 border-t border-slate-200">
         <Button 
           onClick={onNext} 
-          className="form-button-next"
+          className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all"
         >
-          Continue to Education
+          Continue
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-4 w-4 ml-1.5" 
